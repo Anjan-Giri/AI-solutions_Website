@@ -12,9 +12,12 @@ function ContactManagement() {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get("http://localhost:5008/api/contacts", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VERCEL_VARIABLE}/api/contacts`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setContacts(response.data);
     } catch (error) {
       console.error("Error fetching contacts:", error);
@@ -24,9 +27,12 @@ function ContactManagement() {
   const handleDelete = async (id) => {
     try {
       // Send a DELETE request to the backend
-      const response = await fetch(`http://localhost:5008/api/contacts/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${import.meta.env.VERCEL_VARIABLE}/api/contacts/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         // Successfully deleted, remove contact from state
         setContacts((prevContacts) =>
